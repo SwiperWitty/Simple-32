@@ -1,12 +1,12 @@
 #include "Base_IIC.h"
 
 
-void IIC_SDA_Satar (char Mode)
+void IIC_SDA_Satar (char Mode)      //改变SDA线状态
 {
 #ifdef Exist_IIC
     GPIO_InitTypeDef gpio_init_struct;
 
-    if(Mode == GPIO_Mode_Out_PP)
+    if(Mode == IIC_Mode_OUT)
     {
         gpio_init_struct.GPIO_Mode = IIC_Mode_OUT;
     }

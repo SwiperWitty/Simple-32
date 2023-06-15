@@ -265,7 +265,7 @@ I (..\Lib\inc\stm32f10x_tim.h)(0x643F607C)
 I (..\Lib\inc\stm32f10x_usart.h)(0x643F607C)
 I (..\Lib\inc\stm32f10x_wwdg.h)(0x643F607C)
 I (..\Lib\inc\misc.h)(0x643F607C)
-F (..\Lib\Base\Base_IIC.c)(0x6479AF31)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\User -I ..\CMSIS -I ..\Lib\Base -I ..\Lib\inc -I ..\Lib\Mode -I ..\Lib\src -I ..\Startup-ID:\MDK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-ID:\MDK\ARM\CMSIS\Include-D__UVISION_VERSION="532" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DDEFAULT-o ..\obj\base_iic.o --omf_browse ..\obj\base_iic.crf --depend ..\obj\base_iic.d)
+F (..\Lib\Base\Base_IIC.c)(0x648AD3B2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\User -I ..\CMSIS -I ..\Lib\Base -I ..\Lib\inc -I ..\Lib\Mode -I ..\Lib\src -I ..\Startup-ID:\MDK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-ID:\MDK\ARM\CMSIS\Include-D__UVISION_VERSION="532" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DDEFAULT-o ..\obj\base_iic.o --omf_browse ..\obj\base_iic.crf --depend ..\obj\base_iic.d)
 I (..\Lib\Base\Base_IIC.h)(0x6479AA1C)
 I (..\CMSIS\stm32f10x.h)(0x643F607C)
 I (..\CMSIS\core_cm3.h)(0x643F607C)
@@ -389,7 +389,7 @@ I (D:\MDK\ARM\ARMCC\include\stdlib.h)(0x5F63877C)
 I (..\Lib\Mode\lcdfont.h)(0x643F607C)
 I (..\Lib\Base\sys_time.h)(0x643F607C)
 F (..\Lib\Mode\mlx90614.c)(0x6475E209)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\User -I ..\CMSIS -I ..\Lib\Base -I ..\Lib\inc -I ..\Lib\Mode -I ..\Lib\src -I ..\Startup-ID:\MDK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-ID:\MDK\ARM\CMSIS\Include-D__UVISION_VERSION="532" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DDEFAULT-o ..\obj\mlx90614.o --omf_browse ..\obj\mlx90614.crf --depend ..\obj\mlx90614.d)
-I (..\Lib\Mode\mlx90614.h)(0x643F607C)
+I (..\Lib\Mode\mlx90614.h)(0x648AD32E)
 I (..\CMSIS\stm32f10x.h)(0x643F607C)
 I (..\CMSIS\core_cm3.h)(0x643F607C)
 I (D:\MDK\ARM\ARMCC\include\stdint.h)(0x5F63877C)
