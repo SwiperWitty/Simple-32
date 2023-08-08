@@ -17,12 +17,17 @@
 		
 #define LCD_MOSI_Clr() GPIO_ResetBits(GPIOB,GPIO_Pin_15)//MOSI
 #define LCD_MOSI_Set() GPIO_SetBits(GPIOB,GPIO_Pin_15)
-		
-#define LCD_DC_Clr() GPIO_ResetBits(GPIOA,GPIO_Pin_8)	//DC
-#define LCD_DC_Set() GPIO_SetBits(GPIOA,GPIO_Pin_8)
 
-#define LCD_RES_Clr()  GPIO_ResetBits(GPIOA,GPIO_Pin_15)//RES PA15
-#define LCD_RES_Set()  GPIO_SetBits(GPIOA,GPIO_Pin_15)
+#define LCD_DC_Clr() GPIO_ResetBits(GPIOA,GPIO_Pin_10)//DC
+#define LCD_DC_Set() GPIO_SetBits(GPIOA,GPIO_Pin_10)	
+//#define LCD_DC_Clr() GPIO_ResetBits(GPIOA,GPIO_Pin_8)	//DC
+//#define LCD_DC_Set() GPIO_SetBits(GPIOA,GPIO_Pin_8)
+
+
+#define LCD_RES_Clr()  GPIO_ResetBits(GPIOB,GPIO_Pin_12)//RES
+#define LCD_RES_Set()  GPIO_SetBits(GPIOB,GPIO_Pin_12)
+//#define LCD_RES_Clr()  GPIO_ResetBits(GPIOA,GPIO_Pin_15)//RES PA15
+//#define LCD_RES_Set()  GPIO_SetBits(GPIOA,GPIO_Pin_15)
 
 
 #define LCD_CMD  0	//写命令

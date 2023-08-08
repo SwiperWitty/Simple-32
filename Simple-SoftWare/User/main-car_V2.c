@@ -166,6 +166,16 @@ int main(void)
 			// RFID_CAR.CMD = CMD_Read;
 			printf("key \r\n");
 		}
+		if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9) == 0)		// 從
+		{
+			Delay_ms(2);
+			if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9) == 0)
+			{
+				Steering_Engine_Angle(3,90);
+			}
+			while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9) == 0);
+			Steering_Engine_Angle(3,0);
+		}
 	}
 }
 
@@ -370,6 +380,7 @@ char Send_CMD (char Cfg)
 
 void Mian_Init(void)
 {
+	GPIO_InitTypeDef GPIO_InitStructure;
 	if(SysTick_Config(SystemCoreClock/100000))
 	{
 		while(1);
@@ -381,13 +392,18 @@ void Mian_Init(void)
     LCD_Init();//LCD
 	
 	LCD_ShowString(6,0,"Null ",GREEN,BLACK,32); 
-	Steering_Engine_Angle(1,0);
-	Steering_Engine_Angle(2,0);
-	Steering_Engine_Angle(3,0);
-	Steering_Engine_Angle(4,0);
+	Steering_Engine_Angle(1,0); 
+	Steering_Engine_Angle(2,0); 
+	Steering_Engine_Angle(3,0); 
+//	Steering_Engine_Angle(4,0);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
-	GPIO_InitTypeDef GPIO_InitStructure;
+	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //复用推
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -395,7 +411,7 @@ void Mian_Init(void)
 	
 	UART_Send_String(DEBUG_OUT,"hello world !\r\n");
 	Send_CMD(CMD_RST);
-	Delay_ms(500);
+	Delay_ms(400);
 	char try1 = 0;
 	do{
 		CV_UART.Read_Flag[3] = 0;

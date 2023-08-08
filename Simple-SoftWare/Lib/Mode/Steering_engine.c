@@ -15,8 +15,8 @@ void Init_Steering_Engine_T4 (void)
 	TIM4_PWM_Init(Arr_T4, Por_T4);							//20ms pwm  20ms 1.5ms (0) 0.5ms (-90) 2.5ms (+90)
 	TIM_SetCompare1(TIM4, Set_Angle_Cal_180(0));
 	TIM_SetCompare2(TIM4, Set_Angle_Cal_180(0));
-	TIM_SetCompare3(TIM4, Set_Angle_Cal_180(0));
-	TIM_SetCompare4(TIM4, Set_Angle_Cal_180(0));
+//	TIM_SetCompare3(TIM4, Set_Angle_Cal_180(0));
+//	TIM_SetCompare4(TIM4, Set_Angle_Cal_180(0));
 }
 
 void Steering_Engine_360_Sport(char Channel,char Rotation,char Speed,int Time)
