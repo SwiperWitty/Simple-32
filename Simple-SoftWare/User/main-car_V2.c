@@ -389,6 +389,12 @@ void Mian_Init(void)
 	UART_Init(DEBUG_OUT, 9600);		//v831
 	UART_Init(3, 115200);			//RFID
 	Init_Steering_Engine_T4();
+    
+    
+    data_Type_ test_a;
+    Reset_data_Type(&test_a,NULL,0);
+    
+    while(1);
     LCD_Init();//LCD
 	
 	LCD_ShowString(6,0,"Null ",GREEN,BLACK,32); 
@@ -409,7 +415,7 @@ void Mian_Init(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
 	
-	UART_Send_String(DEBUG_OUT,"hello world !\r\n");
+	UART_Send_String(DEBUG_OUT," \n hello world !\r\n");
 	Send_CMD(CMD_RST);
 	Delay_ms(400);
 	char try1 = 0;
@@ -426,12 +432,17 @@ void Mian_Init(void)
 			CV_UART.Rxd_Num[3] = 0;
 		}
 		if(try1 > 10)
-		{while(1);}
-	}while(clo != 0xA0);
+		{
+            UART_Send_String(DEBUG_OUT,"rfid time out !\r\n");
+            while(1);
+        }
+	}while((clo&0xff) != 0xA0);
 	
 	CV_UART.Read_Flag[3] = 1;
 	CV_UART.Rxd_Num[3] = 0;
 	memset(CV_UART.UARTX_Array[3],0,sizeof(CV_UART.UARTX_Array[3]));
+    
+    UART_Send_String(DEBUG_OUT,"run !\r\n");
 	LCD_ShowString(4,0,"Car Stop ",GREEN,BLACK,32); 
 	
 	Voice_Init();
