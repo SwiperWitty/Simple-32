@@ -166,15 +166,15 @@ int main(void)
 			// RFID_CAR.CMD = CMD_Read;
 			printf("key \r\n");
 		}
-		if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9) == 0)		// 從
+		if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5) == 0)		// 從
 		{
 			Delay_ms(2);
-			if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9) == 0)
+			if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5) == 0)
 			{
-				Steering_Engine_Angle(3,90);
+				Steering_Engine_Angle(1,90);
 			}
-			while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9) == 0);
-			Steering_Engine_Angle(3,0);
+			while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5) == 0);
+			Steering_Engine_Angle(1,0);
 		}
 	}
 }
@@ -282,7 +282,7 @@ void RFID_Data(void)
 	{
 		CARS_DATA.step = 3;
 		int go_a0 = 0xFFFF;
-		char temp[200];
+		unsigned char temp[200];
 		int num,n = 0;
 		CV_UART.Rxd_Num[3] = 0;
 		CV_UART.Read_Flag[3] = 0;
@@ -391,10 +391,10 @@ void Mian_Init(void)
 	Init_Steering_Engine_T4();
     
     
-    data_Type_ test_a;
-    Reset_data_Type(&test_a,NULL,0);
+//    data_Type_ test_a;
+//    Reset_data_Type(&test_a,NULL,0);
     
-    while(1);
+//    while(1);
     LCD_Init();//LCD
 	
 	LCD_ShowString(6,0,"Null ",GREEN,BLACK,32); 
@@ -403,7 +403,7 @@ void Mian_Init(void)
 	Steering_Engine_Angle(3,0); 
 //	Steering_Engine_Angle(4,0);
 	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;					
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);

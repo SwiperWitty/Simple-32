@@ -289,7 +289,7 @@ void Reset_data_Type (data_Type_ *target,void *data,int size)
     target->rec_flag = 0;
     target->data_num = 0;
     target->data_run = 0;
-    target->data_loop = 0;
+//    target->data_loop = 0;
     target->data_temp = 0;
     target->data_size = size;
     

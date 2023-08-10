@@ -10,7 +10,7 @@
 #define UART_2 2
 #define UART_3 3
 
-#define DEBUG_OUT UART_1
+#define DEBUG_OUT UART_2
 
 typedef struct 
 {

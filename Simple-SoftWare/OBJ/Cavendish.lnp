@@ -7,6 +7,7 @@
 "..\obj\main-laji.o"
 "..\obj\main-jiaju.o"
 "..\obj\main-bus.o"
+"..\obj\temp.o"
 "..\obj\data_handle.o"
 "..\obj\encoder.o"
 "..\obj\pwm.o"
