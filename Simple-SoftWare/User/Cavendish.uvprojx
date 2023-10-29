@@ -338,7 +338,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER,TEMP</Define>
+              <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER,DEFAULT</Define>
               <Undefine></Undefine>
               <IncludePath>..\User;..\CMSIS;..\Lib\Base;..\Lib\inc;..\Lib\Mode;..\Lib\src;..\Startup</IncludePath>
             </VariousControls>

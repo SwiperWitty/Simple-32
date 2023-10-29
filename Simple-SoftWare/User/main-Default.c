@@ -78,7 +78,7 @@ void Mian_Init(void)
 	UART_Init(Debug, 115200);
 	Init_Steering_Engine_T4();
     LCD_Init();//LCD
-	OLED_Init (ENABLE);
+//	OLED_Init (ENABLE);
     
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 	GPIO_InitTypeDef GPIO_InitStructure;

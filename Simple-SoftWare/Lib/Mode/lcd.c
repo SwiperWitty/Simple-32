@@ -11,21 +11,21 @@ void LCD_GPIO_Init(void)
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE );
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE );
 	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_15;	 
-//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_15;	 //SPI
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_15;	 
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_15;	 //SPI
  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  	GPIO_Init(GPIOB, &GPIO_InitStructure);	  //初始化GPIOB 
 	
-	GPIO_SetBits(GPIOB,GPIO_Pin_13|GPIO_Pin_15);
+//	GPIO_SetBits(GPIOB,GPIO_Pin_13|GPIO_Pin_15);
 	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_15;	//D/C	RES
-//	GPIO_Init(GPIOA, &GPIO_InitStructure);	  //初始化GPIOA
-//	GPIO_SetBits(GPIOA,GPIO_Pin_8 | GPIO_Pin_15);
-	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_15;	//D/C	RES
 	GPIO_Init(GPIOA, &GPIO_InitStructure);	  //初始化GPIOA
-	GPIO_SetBits(GPIOA,GPIO_Pin_10);
+	GPIO_SetBits(GPIOA,GPIO_Pin_8 | GPIO_Pin_15);
+	
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+//	GPIO_Init(GPIOA, &GPIO_InitStructure);	  //初始化GPIOA
+//	GPIO_SetBits(GPIOA,GPIO_Pin_10);
 }
 
 /******************************************************************************
@@ -504,12 +504,18 @@ void LCD_ShowPicture(u16 x,u16 y,u16 length,u16 width,const unsigned char pic[])
 void LCD_Init(void)
 {
 	LCD_GPIO_Init();//初始化GPIO
+	LCD_WR_DATA8(0x00);
+
+	Delay_ms(200); // 等待电路复位完成
+	#if 1
+	LCD_RES_Clr();
+	Delay_ms(200); // 
+	LCD_RES_Set();
 	Delay_ms(200);
-	LCD_RES_Clr();Delay_ms(200);		//Simple 因为LCD模块没有CS接口，所以使用软件复位才能正常工作
-	LCD_RES_Set();Delay_ms(200);
-	
-//	LCD_WR_REG(0x11); //Sleep out 
-//	Delay_ms(120);//Delay 120ms
+	#else
+	LCD_WR_CMD(0x11); // Sleep out
+	Delay_ms(120);
+	#endif
 	
 	LCD_WR_REG(0x36);Delay_ms(120);
 	if(USE_HORIZONTAL==0)LCD_WR_DATA8(0x00);
@@ -589,6 +595,7 @@ void LCD_Init(void)
 	LCD_WR_REG(0x11);
 
 	LCD_WR_REG(0x29);
-	Delay_ms(120);
+	Delay_ms(200);
 	LCD_Fill(0,0,LCD_W,LCD_H,BLACK);
+	Delay_ms(20);
 }
