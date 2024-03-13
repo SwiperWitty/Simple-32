@@ -5,14 +5,14 @@ void ADCx_Init_Caven(char ADC_x)
 {
 	GPIO_InitTypeDef   GPIO_InitStruct;
 	ADC_InitTypeDef  ADC_InitStructure;
-	RCC_ADCCLKConfig(RCC_PCLK2_Div6);   //ÉèÖÃADC·ÖÆµÒò×Ó6 72M/6=12,ADC×î´óÊ±¼ä²»ÄÜ³¬¹ı14M
+	RCC_ADCCLKConfig(RCC_PCLK2_Div6);   //è®¾ç½®ADCåˆ†é¢‘å› å­6 72M/6=12,ADCæœ€å¤§æ—¶é—´ä¸èƒ½è¶…è¿‡14M
 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);		//¸´ÓÃÊ±ÖÓ
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);	//GPIOÊ±ÖÓ
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1,ENABLE);		//ADC Ê±ÖÓ
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);			/* ÅäÖÃÖĞ¶ÏÓÅÏÈ¼¶·Ö×é(ÉèÖÃÇÀÕ¼ÓÅÏÈ¼¶ºÍ×ÓÓÅÏÈ¼¶µÄ·ÖÅä)£¬ÔÚº¯ÊıÔÚmisc.c */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);		//å¤ç”¨æ—¶é’Ÿ
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);	//GPIOæ—¶é’Ÿ
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1,ENABLE);		//ADC æ—¶é’Ÿ
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);			/* é…ç½®ä¸­æ–­ä¼˜å…ˆçº§åˆ†ç»„(è®¾ç½®æŠ¢å ä¼˜å…ˆçº§å’Œå­ä¼˜å…ˆçº§çš„åˆ†é…)ï¼Œåœ¨å‡½æ•°åœ¨misc.c */
 	
-//	ADC_DeInit(ADC1);  //½«ÍâÉè ADC1 µÄÈ«²¿¼Ä´æÆ÷ÖØÉèÎªÈ±Ê¡Öµ
+//	ADC_DeInit(ADC1);  //å°†å¤–è®¾ ADC1 çš„å…¨éƒ¨å¯„å­˜å™¨é‡è®¾ä¸ºç¼ºçœå€¼
 	if(ADC_x == ADC_1)
 	{
 		GPIO_InitStruct.GPIO_Pin = GPIO_Pin_4;
@@ -28,33 +28,33 @@ void ADCx_Init_Caven(char ADC_x)
 	else if(ADC_x == MCU_Temp) ADC_TempSensorVrefintCmd(ENABLE);
 	else return;
 	
-	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;	//ADC¹¤×÷Ä£Ê½:ADC1ºÍADC2¹¤×÷ÔÚ¶ÀÁ¢Ä£Ê½
-	ADC_InitStructure.ADC_ScanConvMode = DISABLE;		//Ä£Êı×ª»»¹¤×÷ÔÚµ¥Í¨µÀÄ£Ê½
-	ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;	//Ä£Êı×ª»»¹¤×÷ÔÚµ¥´Î×ª»»Ä£Ê½
-	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;	//×ª»»ÓÉÈí¼ş¶ø²»ÊÇÍâ²¿´¥·¢Æô¶¯
-	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;	//ADCÊı¾İÓÒ¶ÔÆë
-	ADC_InitStructure.ADC_NbrOfChannel = 1;					//Ë³Ğò½øĞĞ¹æÔò×ª»»µÄADCÍ¨µÀµÄÊıÄ¿
-	ADC_Init(ADC1, &ADC_InitStructure);						//¸ù¾İADC_InitStructÖĞÖ¸¶¨µÄ²ÎÊı³õÊ¼»¯ÍâÉèADCxµÄ¼Ä´æÆ÷   
+	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;	//ADCå·¥ä½œæ¨¡å¼:ADC1å’ŒADC2å·¥ä½œåœ¨ç‹¬ç«‹æ¨¡å¼
+	ADC_InitStructure.ADC_ScanConvMode = DISABLE;		//æ¨¡æ•°è½¬æ¢å·¥ä½œåœ¨å•é€šé“æ¨¡å¼
+	ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;	//æ¨¡æ•°è½¬æ¢å·¥ä½œåœ¨å•æ¬¡è½¬æ¢æ¨¡å¼
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;	//è½¬æ¢ç”±è½¯ä»¶è€Œä¸æ˜¯å¤–éƒ¨è§¦å‘å¯åŠ¨
+	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;	//ADCæ•°æ®å³å¯¹é½
+	ADC_InitStructure.ADC_NbrOfChannel = 1;					//é¡ºåºè¿›è¡Œè§„åˆ™è½¬æ¢çš„ADCé€šé“çš„æ•°ç›®
+	ADC_Init(ADC1, &ADC_InitStructure);						//æ ¹æ®ADC_InitStructä¸­æŒ‡å®šçš„å‚æ•°åˆå§‹åŒ–å¤–è®¾ADCxçš„å¯„å­˜å™¨   
 	
-	ADC_Cmd(ADC1, ENABLE);	//Ê¹ÄÜÖ¸¶¨µÄADC1
-	ADC_ResetCalibration(ADC1);	//Ê¹ÄÜ¸´Î»Ğ£×¼
+	ADC_Cmd(ADC1, ENABLE);	//ä½¿èƒ½æŒ‡å®šçš„ADC1
+	ADC_ResetCalibration(ADC1);	//ä½¿èƒ½å¤ä½æ ¡å‡†
 	Delay_ms(20);
-	while(ADC_GetResetCalibrationStatus(ADC1));	//µÈ´ı¸´Î»Ğ£×¼½áÊø
-	ADC_StartCalibration(ADC1);	 //¿ªÆôADĞ£×¼
-	while(ADC_GetCalibrationStatus(ADC1));	 //µÈ´ıĞ£×¼½áÊø
+	while(ADC_GetResetCalibrationStatus(ADC1));	//ç­‰å¾…å¤ä½æ ¡å‡†ç»“æŸ
+	ADC_StartCalibration(ADC1);	 //å¼€å¯ADæ ¡å‡†
+	while(ADC_GetCalibrationStatus(ADC1));	 //ç­‰å¾…æ ¡å‡†ç»“æŸ
  
-	ADC_SoftwareStartConvCmd(ADC1, ENABLE);		//Ê¹ÄÜÖ¸¶¨µÄADC1µÄÈí¼ş×ª»»Æô¶¯¹¦ÄÜ
+	ADC_SoftwareStartConvCmd(ADC1, ENABLE);		//ä½¿èƒ½æŒ‡å®šçš„ADC1çš„è½¯ä»¶è½¬æ¢å¯åŠ¨åŠŸèƒ½
 }
 
 float ADCx_Read_Vol (char ADC_x)
 {
 	float vol = 0;
 	ADC_RegularChannelConfig(ADC1,ADC_x,1,ADC_De_Time);
-	ADC_SoftwareStartConvCmd(ADC1, ENABLE);			//Ê¹ÄÜÖ¸¶¨µÄADC1µÄÈí¼ş×ª»»Æô¶¯¹¦ÄÜ
+	ADC_SoftwareStartConvCmd(ADC1, ENABLE);			//ä½¿èƒ½æŒ‡å®šçš„ADC1çš„è½¯ä»¶è½¬æ¢å¯åŠ¨åŠŸèƒ½
 	Delay_ms(1);
-	while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC));	//µÈ´ı×ª»»½áÊø
+	while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC));	//ç­‰å¾…è½¬æ¢ç»“æŸ
 	ADC_ClearFlag(ADC1,ADC_FLAG_EOC);
-	vol = ADC1->DR;									//¶ÁÈ¡ADC1Í¨µÀ
+	vol = ADC1->DR;									//è¯»å–ADC1é€šé“
 	vol = (vol/4096)*3.3;
 	return vol;
 }
@@ -62,8 +62,8 @@ float ADCx_Read_Vol (char ADC_x)
 float Read_MCU_Temp (void)
 {
 	float temperate;
-	temperate = ADCx_Read_Vol (MCU_Temp);	//¶ÁÈ¡Í¨µÀ16
-	temperate =(1.43 - temperate)/0.43+25;	//×ª»»ÎªÎÂ¶ÈÖµ
+	temperate = ADCx_Read_Vol (MCU_Temp);	//è¯»å–é€šé“16
+	temperate =(1.43 - temperate)/0.43+25;	//è½¬æ¢ä¸ºæ¸©åº¦å€¼
 	if(temperate<0)
 	{
 		temperate=-temperate;

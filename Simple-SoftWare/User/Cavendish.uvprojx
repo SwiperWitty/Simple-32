@@ -338,7 +338,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER,DEFAULT</Define>
+              <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER,TASK_HUA</Define>
               <Undefine></Undefine>
               <IncludePath>..\User;..\CMSIS;..\Lib\Base;..\Lib\inc;..\Lib\Mode;..\Lib\src;..\Startup</IncludePath>
             </VariousControls>
@@ -428,6 +428,11 @@
               <FileName>temp.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\temp.c</FilePath>
+            </File>
+            <File>
+              <FileName>main-hua.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\main-hua.c</FilePath>
             </File>
           </Files>
         </Group>

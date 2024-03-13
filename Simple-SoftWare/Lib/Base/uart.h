@@ -16,11 +16,11 @@ typedef struct
 {
     char rec_flag;
     void *pointer;
-    int data_size;          //pointer 所指向数据的size
+    int data_size;          //pointer 鎵�鎸囧悜鏁版嵁鐨剆ize
     
     int data_num;
     int data_run;
-    int data_temp;          //当前运行在指针的位置
+    int data_temp;          //褰撳墠杩愯鍦ㄦ寚閽堢殑浣嶇疆
 }data_Type_;
 
 typedef struct 

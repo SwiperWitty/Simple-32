@@ -8,8 +8,8 @@
 			ADC_2        PA5  			ADC1		ADC_Channel_4
 			
 
-			Ñ­¼£²»ÒªÆôÓÃ ADC £¡
-			Attention £ºUsing Tracing enable ADC
+			å¾ªè¿¹ä¸è¦å¯ç”¨ ADC ï¼
+			Attention ï¼šUsing Tracing enable ADC
 												--2021.12.04
 */
 

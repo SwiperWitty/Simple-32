@@ -2,7 +2,7 @@
 #include "lcdfont.h"
 #include "sys_time.h"
 
-u16 BACK_COLOR;   //背景色
+u16 BACK_COLOR = 0xFFFB;   //背景色
 
 void LCD_GPIO_Init(void)
 {
@@ -596,6 +596,6 @@ void LCD_Init(void)
 
 	LCD_WR_REG(0x29);
 	Delay_ms(200);
-	LCD_Fill(0,0,LCD_W,LCD_H,BLACK);
+	LCD_Fill(0,0,LCD_W,LCD_H,BACK_COLOR);
 	Delay_ms(20);
 }
