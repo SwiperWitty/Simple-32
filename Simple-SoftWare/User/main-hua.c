@@ -9,6 +9,7 @@
 #include "OLED.h"
 #include "pic.h"
 #include "MP3.h"
+#include "adc.h"
 
 #define Debug DEBUG_OUT
 void Mian_Init(void);
@@ -16,10 +17,11 @@ void Mian_Init(void);
 char Free_Array[64];
 char array_watch[64];
 
-float vol;
+float light_val,PM25_val,hum_val,temp_val;
+int set_humid_min = 5,set_humid_max = 10;
 int clo = 0;
 int chance = 0;
-
+int temp_run = 0;
 int main(void)
 {
 	Mian_Init();
@@ -42,7 +44,17 @@ int main(void)
 			CV_UART.Rxd_Num[DEBUG_OUT] = 0;
 			CV_UART.Read_Flag[DEBUG_OUT] = 0;
 		}
-		
+		light_val = ADCx_Read_Vol (ADC_1);
+        PM25_val = ADCx_Read_Vol (ADC_2);
+        hum_val = 0;
+        temp_run = 2;
+        sprintf(Free_Array,">humid:%5.2f ",hum_val);LCD_ShowString(0,temp_run++,Free_Array,BLACK,BACK_COLOR,32);
+        sprintf(Free_Array,">temp :%5.2f ",temp_val);LCD_ShowString(0,temp_run++,Free_Array,BLACK,BACK_COLOR,32);
+        sprintf(Free_Array,">light:%5.2f ",light_val);LCD_ShowString(0,temp_run++,Free_Array,BLACK,BACK_COLOR,32);
+        
+        sprintf(Free_Array,">hum min:%d ",set_humid_min);LCD_ShowString(0,temp_run++,Free_Array,BLACK,BACK_COLOR,32);
+        sprintf(Free_Array,">hum max:%d ",set_humid_max);LCD_ShowString(0,temp_run++,Free_Array,BLACK,BACK_COLOR,32);
+        
 		if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13) == 0)
 		{
 			Delay_ms(2);
@@ -76,6 +88,9 @@ void Mian_Init(void)
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);	//禁用JTAG
 	
 	UART_Init(Debug, 115200);
+    UART_Init(UART_3, 115200);
+    ADCx_Init_Caven(ADC_1);
+    ADCx_Init_Caven(ADC_2);
 	Init_Steering_Engine_T4();
     LCD_Init();//LCD
 //	OLED_Init (ENABLE);
@@ -92,12 +107,6 @@ void Mian_Init(void)
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	
     LCD_ShowString(1,0,"Flower nurse",BLUE,BACK_COLOR,32);
-	LCD_ShowString(0,2,">hum: 1% ",BLACK,BACK_COLOR,32);
-	LCD_ShowString(0,3,">temp: 2% ",BLACK,BACK_COLOR,32);
-	LCD_ShowString(0,4,">light: 3% ",BLACK,BACK_COLOR,32);
-	
-	LCD_ShowString(0,5,">hum min: 4% ",BLACK,BACK_COLOR,32);
-	LCD_ShowString(0,6,">hum max: 5% ",BLACK,BACK_COLOR,32);
 	
 	Steering_Engine_Angle(1,0);
 	Steering_Engine_Angle(2,0);
