@@ -17,7 +17,7 @@ void Mian_Init(void);
 char Free_Array[64];
 char array_watch[64];
 
-float light_val,PM25_val,hum_val,temp_val;
+float light_val,PM25_val,hum_val,temp_val,f_temp;
 int set_humid_min = 5,set_humid_max = 10;
 int clo = 0;
 int chance = 0;
@@ -44,9 +44,13 @@ int main(void)
 			CV_UART.Rxd_Num[DEBUG_OUT] = 0;
 			CV_UART.Read_Flag[DEBUG_OUT] = 0;
 		}
-		light_val = ADCx_Read_Vol (ADC_1);
-        PM25_val = ADCx_Read_Vol (ADC_2);
-        hum_val = 0;
+		temp_val = Read_MCU_Temp ();
+		f_temp = 3.3 - ADCx_Read_Vol (ADC_1);
+		light_val = (f_temp / 3.3) * 100;
+        f_temp = 3.3 - ADCx_Read_Vol (ADC_2);
+		hum_val = (f_temp / 3.3) * 100;
+		PM25_val = 0;
+
         temp_run = 2;
         sprintf(Free_Array,">humid:%5.2f ",hum_val);LCD_ShowString(0,temp_run++,Free_Array,BLACK,BACK_COLOR,32);
         sprintf(Free_Array,">temp :%5.2f ",temp_val);LCD_ShowString(0,temp_run++,Free_Array,BLACK,BACK_COLOR,32);
@@ -63,6 +67,10 @@ int main(void)
 			printf("key : %d \r\n",chance);
 			
 		}
+		if(light_val > 80)
+		{
+			chance = 1;
+		}
 		if(chance)
 		{
 			GPIO_ResetBits(GPIOA,GPIO_Pin_11);
@@ -71,6 +79,8 @@ int main(void)
 		{
 			GPIO_SetBits(GPIOA,GPIO_Pin_11);
 		}
+		
+
 		Delay_ms(20);
 	}
 }
@@ -91,6 +101,7 @@ void Mian_Init(void)
     UART_Init(UART_3, 115200);
     ADCx_Init_Caven(ADC_1);
     ADCx_Init_Caven(ADC_2);
+	ADCx_Init_Caven(MCU_Temp);
 	Init_Steering_Engine_T4();
     LCD_Init();//LCD
 //	OLED_Init (ENABLE);
