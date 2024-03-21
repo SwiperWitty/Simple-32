@@ -10,7 +10,7 @@
 #define UART_2 2
 #define UART_3 3
 
-#define DEBUG_OUT UART_2
+#define DEBUG_OUT UART_1		//!!!!
 
 typedef struct 
 {
@@ -39,7 +39,6 @@ void UART_Send_String(char Channel,char *String);
 void UART_Send_Data(char Channel,char *Data,u8 Length);			
 
 
-int Receive_data_load (data_Type_ *target,void *data,int size);
 void Reset_data_Type (data_Type_ *target,void *data,int size);
 
 #endif

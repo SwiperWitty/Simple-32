@@ -549,6 +549,11 @@
               <FileType>1</FileType>
               <FilePath>..\Lib\Mode\OLED.c</FilePath>
             </File>
+            <File>
+              <FileName>RZ7899_MOT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lib\Mode\RZ7899_MOT.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

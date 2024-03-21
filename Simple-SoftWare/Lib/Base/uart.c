@@ -188,11 +188,21 @@ void USART1_IRQHandler (void) //中断处理函数；
 		if (CV_UART.Read_Flag[tag] == 0)
 		{
 			res = USART_ReceiveData(USART1); //接收数据
-			CV_UART.UARTX_Array[tag][CV_UART.Rxd_Num[tag] ++] = res;
+			if(CV_UART.Rxd_Num[tag] == 0)
+			{
+				if(res == '{')
+				{
+					CV_UART.UARTX_Array[tag][CV_UART.Rxd_Num[tag] ++] = res;
+				}
+			}
+			else
+			{
+				CV_UART.UARTX_Array[tag][CV_UART.Rxd_Num[tag] ++] = res;
+			}
 			if (res == '\0' || res == '}')
 			{
 				CV_UART.Read_Flag[tag] = 1;
-				CV_UART.Rxd_Num[tag] = 0;
+//				CV_UART.Rxd_Num[tag] = 0;
 			}
 		}
 	}
@@ -223,63 +233,6 @@ void USART2_IRQHandler(void) //中断处理函数；
 	}
 }
 
-int Receive_data_load (data_Type_ *target,void *data,int size)
-{
-    int retval = 0;
-    int save_temp = size,last_temp = 0,temp = 0;
-    int *temp_pointer = NULL;
-
-    last_temp = target->data_num - target->data_run;        //还没处理的数据
-    if(target == NULL || data == NULL || size <= 0)
-    {
-        goto Bad_END;
-    }
-    if(target->pointer == NULL)
-    {
-        goto Bad_END;
-    }
-    if(target->data_run > target->data_num)
-    {
-        goto Bad_END;
-    }
-    if((last_temp + size) > target->data_size)                  //数据没处理完 加入 本次数据会超标
-    {
-        goto Bad_END;
-    }
-    if(target->data_size == 0)                                  //数据无长度
-    {
-        goto Bad_END;
-    }
-    
-    target->rec_flag = 1;                                       //先别接收 
-    target->data_num += size;
-    target->data_temp = target->data_run % target->data_size;   //处理数据的位置
-    temp_pointer = ((int*) target->pointer + target->data_temp);
-    
-    temp = target->data_size - (save_temp + target->data_temp);
-    if(temp > 0)
-    {
-        memcpy(temp_pointer,data,save_temp);
-    }
-    else
-    {
-        temp = -temp;
-        memcpy(temp_pointer,data,(target->data_size - target->data_temp));
-        memcpy((int*) target->pointer,data,temp);               //从头开始
-    }
-    
-    goto END_exit;
-    
-    Happy_END:
-        retval = 0;
-        return retval;
-    Bad_END:
-        retval = 1;
-        return retval;
-    END_exit:
-        target->rec_flag = 0;       //开启接收 
-        return retval;
-}
 
 void Reset_data_Type (data_Type_ *target,void *data,int size)
 {

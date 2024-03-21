@@ -74,6 +74,7 @@ void LCD_ShowChinese(u16 x,u16 y,char *s,u16 fc,u16 bc,char sizey,char mode);//�
 void LCD_ShowString(u16 x,u16 y,const char *p,u16 fc,u16 bc,char sizey);//显示字符串
 void LCD_ShowPicture(u16 x,u16 y,u16 length,u16 width,const unsigned char pic[]);//显示图片
 
+void LCD_fast_Init(void);//LCD初始化
 void LCD_Init(void);//LCD初始化
 void LCD_Clear(u16 Color);
 
