@@ -1,37 +1,60 @@
-# Simple-32
-基于STM32F103C8T6丐中丐最小系统板的code，本库包含代码&amp;硬件。
+## 说明
 
-此版本可用于**毕业设计**、**水课程设计**、**验证**一些简单idea。
+此设计是针对于STM32毕业设计的
 
-<img src="https://gitee.com/Swiper_witty/caven_img/raw/master/img/202306051123515.png" alt="image-20230605112332396" style="zoom:50%;" />
+包括但不限于
 
+信号发生器、接收器
 
+传感器数据处理
 
-- 温敏、光敏等（ADC * 2 ）
-- DS18b20/DHT11 温湿度传感器
-- 语音（UART2-TX）
-- 视觉(UART2-RX)
--  蓝牙 (UART1)
-- LCD(SPI)
-- OLED（IIC）
-- 红外测温（IIC）
-- KEY
-- LED（WS2812、LED）
-- 蜂鸣器
-- 超声波（HR04）
-- 步进电机（28BYJ-48）
-- 直流电机 * 1
-- 舵机 * 4
-- type c接口（单纯供电）
+热成像数据
 
-以上功能都可以外接（通过杜邦线延长）。
+电机控制
+
+智能IOT
+
+...
 
 
 
-硬件GitHub地址：[PCB-Control](https://github.com/SwiperWitty/PCB-Control) ，此目录下有一个 Simple-32文件，这个就是了。
+### software
 
-软件GitHub地址：[Simple-32](https://github.com/SwiperWitty/Simple-32) ，此目录下有一个 Simple-SoftWare文件。
+[Core-Caven32](https://github.com/SwiperWitty/Core-Caven32/tree/master/Caven-V3.14-M3/STM32F103C8)
 
-我的b站：[bilibili](https://space.bilibili.com/102898291?spm_id_from=333.1007.0.0) 
 
-感谢大家！
+
+### hardware
+
+
+
+引脚定义
+
+- LCD:	*PA10(DC)*、PB0(RES)、PB12(NSS) 13(SLCK) 14 15(MOSI) PB1(SPI2-NSS2)
+- OLED:	PB10(SCL) PB11(SDA)
+- ENCODE:	[TIM2]PA15、PB3	[KEY]PC13
+- PWM:	[TIM4]PB6 7 8 9
+- ADC:	PA4、PA5
+- BLE:	[UART1]PA9、*PA10* 
+- Open AI:	[UART2]PA2、PA3
+- HC_SR04:	PB4、PB5
+- DS18B20:	PA8
+- RZ7899:	*PA0、PA1*
+- A4988:	*PA6、PA7* (PC4、PC5)
+- ULN2003:	*PA0、PA1、PA6、PA7*
+- LED:	PA11
+- BZZ:	PA12
+
+注意：
+
+1. PA10在LCD和BLE有冲突(不可同时使用)
+2. RZ7899和A4988分别都与ULN2003冲突
+
+兼容了CavenRTOS。
+
+
+
+
+
+
+
