@@ -26,6 +26,10 @@
 
 ### hardware
 
+new
+
+![image-20250512165200944](https://gitee.com/Swiper_witty/caven_img/raw/master/img/202505121652048.png)
+
 
 
 引脚定义
